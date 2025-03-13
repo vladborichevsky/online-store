@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { useRoute } from 'vue-router'
 
 import GetData from '@/services/apiFetch'
+const URLjson = '/product_list.json'
 
 export interface MyProduct {
   id: number,
@@ -24,7 +25,7 @@ export const useStore = defineStore('store', () => {
   const purchaseAmount = ref<number>(0) // сумма товаров в корзине
 
   async function updateProductArray() {
-    productArray.value = await GetData('/product_list.json')
+    productArray.value = await GetData(URLjson)
     calcSumOfGoodsInBasket() // и сразу же высчитываем сумму товаров в корзине
   }
 
@@ -47,7 +48,7 @@ export const useStore = defineStore('store', () => {
   }
 
   function updShoppingCartFromLocalStorage() { // функция, которая проверяет корзину из local storage
-    if(Array.isArray(JSON.parse(localStorage.getItem('shoppingCartJSON')  || '' ))) {
+    if(localStorage.getItem('shoppingCartJSON')) {
       const localStorageArr: string[] = JSON.parse(localStorage.getItem('shoppingCartJSON') || '[]');
       localStorageArr.forEach(item => pushShoppingCart(+item))
     }
