@@ -54,6 +54,9 @@ export const PopUpReduceThePrice = async (): Promise<void> => {
     focusConfirm: false,
     confirmButtonText: "Отправить",
     confirmButtonColor: "oklch(0.488 0.243 264.376)",
+    showCancelButton: true,
+    cancelButtonText: "Отмена",
+    cancelButtonColor: "#382E2B",
     preConfirm: () => {
       const urlInput = (document.getElementById("url-input") as HTMLInputElement).value || ""
       const phoneInput = (document.getElementById("phone-input") as HTMLInputElement).value || ""

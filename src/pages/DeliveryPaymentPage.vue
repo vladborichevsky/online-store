@@ -1,7 +1,7 @@
 <template>
-  <div class="mt-20 text-main_color text-xl font-semibold">Доставка и оплата</div>
+  <div class="mt-32 text-main_color text-sm font-semibold sm:mt-20 sm:text-xl">Доставка и оплата</div>
 
-  <div class="w-[70%] mx-auto">
+  <div class="w-4/5 mx-auto md:w-3/5">
     <div
       v-for="item in items"
       :key="item.id"
@@ -9,14 +9,14 @@
 
       <button
         @click="toggleItem(item.id)"
-        class="w-full text-left font-semibold text-lg px-4 py-2 bg-gray-100 rounded-lg">
+        class="w-full text-left font-semibold text-xs text-white px-4 py-2 bg-main_color rounded-lg sm:text-base">
           {{ item.title }}
       </button>
       
       <div
         class="grid transition-all duration-300 ease-in-out overflow-hidden"
         :class="openItemId === item.id ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
-          <div class="overflow-hidden px-4 py-2 bg-white shadow rounded-lg text-left">
+          <div class="overflow-hidden px-4 py-1 bg-white shadow rounded-lg text-left text-xs sm:text-base">
             <p class="whitespace-pre-line text-justify">{{ item.content }}</p>
             <p v-if="item.price" class="font-semibold">{{ item.price }}</p>
           </div>

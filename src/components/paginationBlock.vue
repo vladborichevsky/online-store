@@ -1,14 +1,14 @@
 <template>
   <div>
     <main-colored-btn 
-      v-if="pageNumber * 9 <= quantityOfGoods" 
+      v-if="pageNumber * numbOfProdPerPage <= quantityOfGoods" 
       @click="pageNumberInc"
       class="mb-7">
         Ещё
     </main-colored-btn>
 
     <main-colored-btn 
-      v-if="pageNumber * 9 >= quantityOfGoods" 
+      v-if="pageNumber * numbOfProdPerPage >= quantityOfGoods" 
       @click="pageUp"
       class="mb-7">
         Наверх
@@ -25,6 +25,7 @@
 
   const store = useStore()
 
+  const numbOfProdPerPage = computed(()=> store.numbOfProdPerPage)
   const pageNumber = computed(() => store.pageNumber)
   const pageNumberInc = computed(() => store.pageNumberInc)
   const quantityOfGoods = computed(() => store.quantityOfGoods)

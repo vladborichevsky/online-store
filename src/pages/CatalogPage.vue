@@ -1,12 +1,10 @@
 <template>
-  <div class="mt-20">
-    <h1 class="mt-5 text-2xl font-bold">Реплики всемирно известных картин</h1>
+  <div class="mt-32 sm:mt-20">
+    <h1 class="text-base mt-5 font-bold sm:text-xl lg:text-2xl">Репродукции всемирно известных картин</h1>
 
-    <div class="w-3/4 mx-auto flex items-center text-xs">
-      <div>
-        Сортировка:
-      </div>
-      <select v-model="sortBy" class="custom-select cursor-pointer px-2 w-select_options text-blue-700 focus:outline-none active:outline-none focus:border-transparent active:border-transparent">
+    <div class="w-3/4 mx-auto flex items-center justify-center text-xs xs:justify-start">
+      <img src="/sort_by.svg" alt="sort by" class="w-4 h-4">
+      <select v-model="sortBy" class="custom-select w-select_options cursor-pointer pl-1 bg-white  text-blue-700 focus:outline-none active:outline-none focus:border-transparent active:border-transparent">
         <option class="bg-main_color text-white" value="byPopularity" selected>По популярности</option>
         <option class="bg-main_color text-white" value="byPaintingName">По названию картины</option>
         <option class="bg-main_color text-white" value="ByAuthorName">По имени автора</option>
@@ -15,7 +13,7 @@
       </select>
     </div>
 
-    <div class="mt-5 pb-6 grid grid-cols-3 justify-self-center"> 
+    <div class="mt-5 pb-6 grid grid-cols-2 justify-self-center place-items-center sm:grid-cols-3"> 
       <transition-group name="product-list">
         <product-card
           v-for="(item, index) in filteredProductArray?.slice(0, pageNumber)"
@@ -43,8 +41,9 @@
 
   const store = useStore()
 
+  const numbOfProdPerPage = computed(()=> store.numbOfProdPerPage)
   const filteredProductArray = computed(() => store.filteredProductArray)
-  const pageNumber = computed(() => store.pageNumber * 9)
+  const pageNumber = computed(() => store.pageNumber * numbOfProdPerPage.value)
 
   const sortBy = computed({
     get: () => store.sortBy,

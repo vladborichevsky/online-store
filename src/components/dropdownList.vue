@@ -2,8 +2,8 @@
   <div>
     <dropdownListItem
       v-if="filteredProductArray"
-      v-for="(item, index) in filteredProductArray"
-      @click.stop="[$router.push(`/product/${filteredProductArray[index].id}`), hideDropdownListForce()]"
+      v-for="(item, index) in filteredProductArray.slice(0, 4)"
+      @click.stop="[$router.push(`/product/${filteredProductArray[index].id}`), hideDropdownListForce(), clearSearchInput()]"
       :key="item.id"
       :product="filteredProductArray[index]"/>
 
@@ -24,4 +24,5 @@
 
   const filteredProductArray = computed(() => store.filteredProductArray)
   const hideDropdownListForce = computed(() => store.hideDropdownListForce)
+  const clearSearchInput = computed(() => store.clearSearchInput)
 </script>

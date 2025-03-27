@@ -12,13 +12,25 @@ export default {
         border_color: '#E1E1E1'
       },
       width: {
-        product_card_width: '380px',
-        shopping_Cart_item: '600px',
-        select_options: '170px'
+        prod_card_w: '380px',
+        prod_card_w_middle: '220px',
+        shop_cart_item_w: '600px',
+        shop_cart_item_mid_w: '360px',
+        shop_cart_item_small_w: '280px',
+        select_options: '155px'
       },
       height: {
-        product_card_height: '380px',
-        product_card_img_height: '230px'
+        prod_card_h: '380px',
+        prod_card_h_lg: '290px',
+        prod_card_h_mid: '230px',
+        prod_card_h_small: '200px',
+        prod_card_img_h: '230px',
+        prod_card_img_h_lg: '170px',
+        prod_card_img_h_middle: '120px',
+        prod_card_img_h_small: '90px'
+      },
+      screens: {
+        'xs': '470px'
       }
     },
   },

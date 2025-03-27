@@ -63,7 +63,13 @@ export const useStore = defineStore('store', () => {
     })
   }
 
+  const numbOfProdPerPage: number = 18 // число товаров на странице
+
   const searchInput = ref<string>('')
+
+  function clearSearchInput() { // функция, очищающая инпут поиска
+    searchInput.value = ''
+  }
 
   function setSearchInputValue(newValue: string) {
     searchInput.value = newValue;
@@ -222,5 +228,5 @@ export const useStore = defineStore('store', () => {
     showDropdownList.value = false
   }
 
-  return { productArray, updateProductArray, shoppingCart, updShoppingCartFromLocalStorage, purchaseAmount, delElShoppingCart, pushShoppingCart, searchInput, setSearchInputValue, searchBy, changeSearchByVar, sortBy, changeSortByVar, filteredProductArray, quantityOfGoods, pageNumber, pageNumberInc, currentPage, updateCurrentPage, showDropdownList, hideDropdownList, hideDropdownListForce }
+  return { productArray, updateProductArray, shoppingCart, updShoppingCartFromLocalStorage, purchaseAmount, delElShoppingCart, pushShoppingCart, numbOfProdPerPage, searchInput, clearSearchInput, setSearchInputValue, searchBy, changeSearchByVar, sortBy, changeSortByVar, filteredProductArray, quantityOfGoods, pageNumber, pageNumberInc, currentPage, updateCurrentPage, showDropdownList, hideDropdownList, hideDropdownListForce }
 })
