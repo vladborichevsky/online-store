@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import HomePage from '../pages/HomePage.vue'
 import CatalogPage from '../pages/CatalogPage.vue'
+import ClasWorksPage from '../pages/ClasWorksPage.vue'
+import ModWorksPage from '../pages/ModWorksPage.vue'
 import ProductPage from '../pages/ProductPage.vue'
 import DeliveryPaymentPage from '../pages/DeliveryPaymentPage.vue'
 import ContactsPage from '../pages/ContactsPage.vue'
@@ -11,8 +14,20 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/', alias: '/catalog',
+      path: '/', alias: '/home',
+      component: HomePage,
+    },
+    {
+      path: '/catalog',
       component: CatalogPage,
+    },
+    {
+      path: '/classic',
+      component: ClasWorksPage,
+    },
+    {
+      path: '/modern',
+      component: ModWorksPage,
     },
     {
       path: '/product/:id',

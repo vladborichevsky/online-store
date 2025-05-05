@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div v-if="filteredProductArray">
     <dropdownListItem
-      v-if="filteredProductArray"
       v-for="(item, index) in filteredProductArray.slice(0, 4)"
       @click.stop="[$router.push(`/product/${filteredProductArray[index].id}`), hideDropdownListForce(), clearSearchInput()]"
       :key="item.id"

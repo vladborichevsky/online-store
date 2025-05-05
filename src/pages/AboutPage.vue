@@ -15,9 +15,16 @@
       Почувствуйте прикосновение искусства — выберите свою картину уже сегодня!
     </p>
 
+    <our-team/>
+
     <img 
       src="/logo.webp" 
       class="w-3/5 mt-5 mx-auto sm:w-2/5 md:mt-10"
       alt="logo">
   </div>
 </template>
+
+
+<script lang="ts" setup>
+  import ourTeam from "@/components/ourTeam.vue";
+</script>

@@ -97,7 +97,6 @@
 
     #swal2-html-container {
       font-size: 14px;
-      /* width: 230px; */
     }
 
     .swal2-confirm,

@@ -23,6 +23,10 @@
       </div>
     </div>
   </div>
+ 
+  <div class="my-5 text-sm md:text-xl" title="c 8:00 до 19:00 каждый день">
+    По всем вопросам: <a href="tel:8-981-265-34-18" class="text-sm md:text-2xl" >8-981-265-34-18</a>
+  </div>
 </template>
 
 

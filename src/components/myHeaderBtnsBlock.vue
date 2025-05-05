@@ -18,6 +18,10 @@
   <!-- лого. отображается на планшетном и выше разрешении -->
 
   <my-header-btn @click="[routerPush('/'), closeHamburger(), clearSearchInput()]">
+    Главная
+  </my-header-btn>
+
+  <my-header-btn @click="[routerPush('/catalog'), closeHamburger(), clearSearchInput()]">
     Каталог
   </my-header-btn>
 
@@ -30,7 +34,7 @@
   </my-header-btn>
 
   <my-header-btn @click="[routerPush('/about'), closeHamburger(), clearSearchInput()]">
-    О компании
+    О нас
   </my-header-btn>
 </template>
 
@@ -50,8 +54,9 @@
   const router = useRouter()
 
   const clearSearchInput = computed(() => store.clearSearchInput)
-  const routerPush = async (path: string) => {
-    await router.push(path) 
+
+  const routerPush = (path: string) => {
+    router.push(path) 
   }
 
   const closeHamburger = () => {

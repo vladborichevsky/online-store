@@ -39,11 +39,6 @@
           В корзину
       </transparent-btn>
     </div>
-
-
-
-
-
   </div>
 </template>
 

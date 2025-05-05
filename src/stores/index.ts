@@ -13,6 +13,7 @@ export interface MyProduct {
   size: string,
   creation_date: string,
   description: string,
+  style: string,
   price: {
     new: number,
     old: number
@@ -88,109 +89,61 @@ export const useStore = defineStore('store', () => {
   }
 
   const filteredProductArray = computed(() => {
-    if(searchInput.value.length == 0) {
-      if (sortBy.value == 'byPopularity') {
-        return productArray.value?.sort((a, b)=> a.id - b.id)
-      }
-
-      if (sortBy.value === 'byPaintingName') {
-        return productArray.value?.sort(function(a, b){
-          if (a.name < b.name) 
-            return -1
-          if (a.name > b.name)
-            return 1
-          return 0
-        })
-      }
-
-      if (sortBy.value === 'ByAuthorName') {
-        return productArray.value?.sort(function(a, b){
-          if (a.author < b.author) 
-            return -1
-          if (a.author > b.author)
-            return 1
-          return 0
-        })
-      }
-
-      if (sortBy.value === 'byDecreasingPrice') {
-        return productArray.value?.sort((a, b)=> b.price.new - a.price.new)
-      }
-
-      if (sortBy.value === 'byIncreasePrice') {
-        return productArray.value?.sort((a, b)=> a.price.new - b.price.new)
-      }
-    } 
-    
-    else if (searchInput.value.length > 0 && searchBy.value === 'paintings') {
-      if (sortBy.value == 'byPopularity') {
-        return productArray.value?.filter(item => item.name.toLowerCase().includes(searchInput.value.toLowerCase())).sort((a, b)=> a.id - b.id)
-      }
-
-      if (sortBy.value === 'byPaintingName') {
-        return productArray.value?.filter(item => item.name.toLowerCase().includes(searchInput.value.toLowerCase())).sort(function(a, b){
-          if (a.name < b.name) 
-            return -1
-          if (a.name > b.name)
-            return 1
-          return 0
-        })
-      }
-
-      if (sortBy.value === 'ByAuthorName') {
-        return productArray.value?.filter(item => item.name.toLowerCase().includes(searchInput.value.toLowerCase())).sort(function(a, b){
-          if (a.author < b.author) 
-            return -1
-          if (a.author > b.author)
-            return 1
-          return 0
-        })
-      }
-
-      if (sortBy.value === 'byDecreasingPrice') {
-        return productArray.value?.filter(item => item.name.toLowerCase().includes(searchInput.value.toLowerCase())).sort((a, b)=> b.price.new - a.price.new)
-      }
-
-      if (sortBy.value === 'byIncreasePrice') {
-        return productArray.value?.filter(item => item.name.toLowerCase().includes(searchInput.value.toLowerCase())).sort((a, b)=> a.price.new - b.price.new)
+    if (!productArray.value) return []
+  
+    // Копируем массив, чтобы не мутировать исходный
+    let result = [...productArray.value]
+  
+    const searchTerm = searchInput.value.toLowerCase()
+  
+    // Фильтрация
+    if (searchTerm.length > 0) {
+      if (searchBy.value === 'paintings') {
+        result = result.filter(item =>
+          item.name.toLowerCase().includes(searchTerm)
+        )
+      } else if (searchBy.value === 'authors') {
+        result = result.filter(item =>
+          item.author.toLowerCase().includes(searchTerm)
+        )
       }
     }
-    
-    else if (searchInput.value.length > 0 && searchBy.value === 'authors') {
-      if (sortBy.value === 'byPopularity') {
-        return productArray.value?.filter(item => item.author.toLowerCase().includes(searchInput.value.toLowerCase())).sort((a, b)=> a.id - b.id)
-      }
-
-      if (sortBy.value === 'byPaintingName') {
-        return productArray.value?.filter(item => item.author.toLowerCase().includes(searchInput.value.toLowerCase())).sort(function(a, b){
-          if (a.name < b.name) 
-            return -1
-          if (a.name > b.name)
-            return 1
-          return 0
-        })
-      }
-
-      if (sortBy.value === 'ByAuthorName') {
-        return productArray.value?.filter(item => item.author.toLowerCase().includes(searchInput.value.toLowerCase())).sort(function(a, b){
-          if (a.author < b.author) 
-            return -1
-          if (a.author > b.author)
-            return 1
-          return 0
-        })
-      }
-
-      if (sortBy.value === 'byDecreasingPrice') {
-        return productArray.value?.filter(item => item.author.toLowerCase().includes(searchInput.value.toLowerCase())).sort((a, b)=> b.price.new - a.price.new)
-      }
-
-      if (sortBy.value === 'byIncreasePrice') {
-        return productArray.value?.filter(item => item.author.toLowerCase().includes(searchInput.value.toLowerCase())).sort((a, b)=> a.price.new - b.price.new)
-      }
+  
+    // Сортировка
+    switch (sortBy.value) {
+      case 'byPaintingName':
+        result.sort((a, b) => a.name.localeCompare(b.name))
+        break
+      case 'ByAuthorName':
+        result.sort((a, b) => a.author.localeCompare(b.author))
+        break
+      case 'byDecreasingPrice':
+        result.sort((a, b) => b.price.new - a.price.new)
+        break
+      case 'byIncreasePrice':
+        result.sort((a, b) => a.price.new - b.price.new)
+        break
+      case 'byPopularity':
+      default:
+        result.sort((a, b) => a.id - b.id)
+        break
     }
-  }) 
+  
+    return result
+  })
 
+  const pageNumber = ref<number>(1)
+
+  function pageNumberInc() {
+    pageNumber.value = pageNumber.value + 1
+  }
+
+  // Классические произведения
+  const classicProdArray = computed(() => filteredProductArray.value.filter((item) => item.style === 'cl') )
+
+  // Современные произведения
+  const modernProdArray = computed(() => filteredProductArray.value.filter((item) => item.style === 'md') )
+  
   const quantityOfGoods = computed<number>(() => {
     if(filteredProductArray.value) {
       return filteredProductArray.value?.length
@@ -202,12 +155,6 @@ export const useStore = defineStore('store', () => {
   const route = useRoute()
   const currentPage = ref<string>(route.path)
   const showDropdownList = ref<boolean>(false)
-
-  const pageNumber = ref<number>(1)
-
-  function pageNumberInc() {
-    pageNumber.value = pageNumber.value + 1
-  }
 
   function updateCurrentPage() {
     showDropdownList.value = true
@@ -228,5 +175,5 @@ export const useStore = defineStore('store', () => {
     showDropdownList.value = false
   }
 
-  return { productArray, updateProductArray, shoppingCart, updShoppingCartFromLocalStorage, purchaseAmount, delElShoppingCart, pushShoppingCart, numbOfProdPerPage, searchInput, clearSearchInput, setSearchInputValue, searchBy, changeSearchByVar, sortBy, changeSortByVar, filteredProductArray, quantityOfGoods, pageNumber, pageNumberInc, currentPage, updateCurrentPage, showDropdownList, hideDropdownList, hideDropdownListForce }
+  return { productArray, updateProductArray, shoppingCart, updShoppingCartFromLocalStorage, purchaseAmount, delElShoppingCart, pushShoppingCart, numbOfProdPerPage, searchInput, clearSearchInput, setSearchInputValue, searchBy, changeSearchByVar, sortBy, changeSortByVar, filteredProductArray, classicProdArray, modernProdArray, quantityOfGoods, pageNumber, pageNumberInc, currentPage, updateCurrentPage, showDropdownList, hideDropdownList, hideDropdownListForce }
 })

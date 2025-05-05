@@ -1,5 +1,5 @@
 <template>
-  <header class="relative w-full h-fit bg-white flex flex-col items-center">
+  <header class="z-10 relative w-full h-fit bg-white flex flex-col items-center">
     <!-- Затемнение фона. отображается только на мобильной версии -->
     <div 
       v-show="hamburgerIsOpen" 
@@ -23,7 +23,7 @@
     </aside>
     <!-- "Гамбургер" / Меню. отображается только на мобильной версии -->
 
-    <div ref="targetElement" class="hidden w-4/5 mx-auto my-2 justify-between items-center md:w-3/5 xl:w-2/5 sm:flex">
+    <div ref="targetElement" class="hidden w-4/5 mx-auto my-2 justify-between items-center sm:flex md:w-4/5 xl:w-3/5">
       <my-header-btns-block/>
     </div>
 
@@ -43,7 +43,7 @@
               <SearchInput/>
 
               <dropdown-list
-                v-if="searchInput.length > 0 && currentPage != '/' && showDropdownList"
+                v-if="searchInput.length > 0 && currentPage != '/catalog' && showDropdownList"
                 class="w-[130%] absolute top-12 left-[-15%] z-10 sm:left-0 lg:w-full"/>
             </div>
 

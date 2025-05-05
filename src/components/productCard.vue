@@ -47,15 +47,16 @@
   import type { MyProduct } from "@/stores/index"
 
   const props = defineProps<{
-    index: number;
+    index: number,
+    array: MyProduct[] | null
   }>()
 
   const store = useStore()
   const router = useRouter()
   
   const product = computed<MyProduct | null>(() => {
-    if(store.filteredProductArray) {
-      return store.filteredProductArray[props.index]
+    if(store.filteredProductArray && props.array) {
+      return props.array[props.index]
     } else {
       return null
     }
