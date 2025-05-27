@@ -1,16 +1,21 @@
 <template>
-  <div class="cursor-pointer wrapper group flex relative w-full md:w-[50%] max-w-full aspect-[5/3] md:mr-[5px]">
-    <div class="w-full h-full overflow-hidden brightness-50 rounded-xl">
-      <img :src=props.src class="h-full w-full object-center object-cover transition-transform duration-300 group-hover:scale-110 ease-in-out" />
+  <div
+    class="wrapper group relative flex aspect-[5/3] w-full max-w-full cursor-pointer md:mr-[5px] md:w-[50%]"
+  >
+    <div class="h-full w-full overflow-hidden rounded-xl brightness-50">
+      <img
+        :src="props.src"
+        class="h-full w-full object-cover object-center transition-transform duration-300 ease-in-out group-hover:scale-110"
+      />
     </div>
-    <div class="absolute w-full h-full">
+    <div class="absolute h-full w-full">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-  const props = defineProps<{
-    src: string;
-  }>()
+const props = defineProps<{
+  src: string
+}>()
 </script>

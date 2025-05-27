@@ -1,6 +1,21 @@
 <template>
-  <button 
-    class="w-20 h-8 px-1 cursor-pointer bg-inherit border-2 border-main_color text-xs text-main_color hover:bg-main_color_light hover:text-white md:text-sm md:w-24 lg:text-base lg:w-40 lg:px-1 lg:py-1 lg:h-12 xl:h-12">
-      <slot></slot>
+  <button
+    class="h-8 w-20 cursor-pointer border-2 bg-inherit px-1 text-xs text-main_color hover:text-white md:w-24 md:text-sm lg:h-12 lg:w-40 lg:px-1 lg:py-1 lg:text-base xl:h-12"
+    :class="[
+      nightMode
+        ? 'border-white text-white hover:bg-main_color'
+        : 'border-main_color hover:bg-main_color_light',
+    ]"
+  >
+    <slot></slot>
   </button>
 </template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useStore } from '@/stores/index'
+
+const store = useStore()
+
+const nightMode = computed(() => store.nightMode)
+</script>

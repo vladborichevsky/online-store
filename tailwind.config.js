@@ -1,15 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}"
-  ],
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
         main_color: '#382E2B',
         main_color_light: '#544540',
-        border_color: '#E1E1E1'
+        border_color: '#E1E1E1',
+        night_mode_color: '#121212',
       },
       width: {
         prod_card_w: '380px',
@@ -17,7 +15,7 @@ export default {
         shop_cart_item_w: '600px',
         shop_cart_item_mid_w: '360px',
         shop_cart_item_small_w: '280px',
-        select_options: '155px'
+        select_options: '155px',
       },
       height: {
         prod_card_h: '380px',
@@ -27,13 +25,12 @@ export default {
         prod_card_img_h: '230px',
         prod_card_img_h_lg: '170px',
         prod_card_img_h_middle: '120px',
-        prod_card_img_h_small: '90px'
+        prod_card_img_h_small: '90px',
       },
       screens: {
-        'xs': '470px'
-      }
+        xs: '470px',
+      },
     },
   },
   plugins: [],
 }
-

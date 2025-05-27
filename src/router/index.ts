@@ -14,7 +14,8 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/', alias: '/home',
+      path: '/',
+      alias: '/home',
       component: HomePage,
     },
     {
@@ -48,7 +49,7 @@ const router = createRouter({
     {
       path: '/shopping_cart',
       component: ShoppingCartPage,
-    }
+    },
   ],
 })
 

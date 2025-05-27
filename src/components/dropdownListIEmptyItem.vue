@@ -1,7 +1,7 @@
 <template>
-  <div class="text-xs text-white text-center bg-main_color border-2 my-1 p-2 lg:text-sm xl:text-base">
+  <div
+    class="my-1 border-2 bg-main_color p-2 text-center text-xs text-white lg:text-sm xl:text-base"
+  >
     Ничего не найдено...
   </div>
 </template>
-
-
